@@ -1,7 +1,7 @@
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import IntegrityError, DataError
 from sqlalchemy.orm import sessionmaker, Session, Query
-
+from sqlalchemy import desc
 from db.exceptions import DBIntegrityException, DBDataException
 from db.models import BaseModel, DBAds
 
@@ -18,8 +18,20 @@ class DBSession:
     def get_ad_by_id(self, ad_id: int):
         return self.query(DBAds).filter(DBAds.id == ad_id).first()
 
-    def get_lst(self):
-        return self.query(DBAds).all()
+    def get_ads(self):
+        return self.query(DBAds)
+
+    def get_lst_descend_price(self, start, end):
+        return self.get_ads().order_by(desc("price")).slice(start, end)
+
+    def get_lst_ascend_price(self, start, end):
+        return self.get_ads().order_by("price").slice(start, end)
+
+    def get_lst_ascend_date_old(self, start, end):
+        return self.get_ads().order_by("created_at").slice(start, end)
+
+    def get_lst_descend_date_new(self, start, end):
+        return self.get_ads().order_by(desc("created_at")).slice(start, end)
 
     def add_model(self, model: BaseModel):
         try:

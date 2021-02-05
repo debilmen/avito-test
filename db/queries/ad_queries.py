@@ -15,7 +15,7 @@ def create_ad(session: DBSession, ad: RequestCreateDto) -> DBAds:
         price=ad.price,
     )
     session.add_model(new_ad)
-
+    new_ad.status_code = 201
     return new_ad
 
 
@@ -26,6 +26,19 @@ def get_ad(session: DBSession, ad_id: int) -> DBAds:
     return db_ad
 
 
-def get_list(session: DBSession) -> List[DBAds]:
-    lst = session.get_lst()
+def get_list(session: DBSession, page_n: int, ascend_price, ascend_date) -> List[DBAds]:
+    page_n -= 1
+    start = int(f"{page_n}0")
+    end = start + 10
+    if ascend_date:
+        lst = session.get_lst_ascend_date_old(start, end)
+    elif ascend_date is False:
+        lst = session.get_lst_descend_date_new(start, end)
+    else:
+        lst = session.get_lst_descend_date_new(start, end)  # по умолчанию сортировка по дате "с нового"
+    if ascend_price:
+        lst = session.get_lst_ascend_price(start, end)
+    elif ascend_price is False:
+        lst = session.get_lst_descend_price(start, end)
+
     return lst

@@ -9,7 +9,7 @@ class DBAds(BaseModel):
 
     name = Column(VARCHAR(200), nullable=False)
     description = Column(VARCHAR(1000))
-    photo = Column(VARCHAR(50), nullable=False)
-    price = Column(VARCHAR(50))
+    photo = Column(VARCHAR(500), nullable=False)
+    price = Column(INT())
     all_photo = Column(VARCHAR(1000), nullable=False)
 

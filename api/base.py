@@ -2,7 +2,6 @@ from typing import List
 
 from marshmallow import Schema, ValidationError, EXCLUDE
 
-
 from api.exceptions import ApiValidationException, ApiResponseValidationException
 
 
@@ -28,7 +27,7 @@ class RequestDto:
 class ResponseDto:
     __schema__: Schema
 
-    def __init__(self, obj, many: bool = False, all: bool = True):
+    def __init__(self, obj, many: bool = False, all: bool = True, ):
         if many:
             properties = [self.parse_obj(o) for o in obj]
         else:
@@ -36,18 +35,20 @@ class ResponseDto:
         if not all:
             properties.pop("all_photo")
             properties.pop("description")
+
         try:
             self._data = self.__schema__(unknown=EXCLUDE, many=many).load(properties)
         except ValidationError as error:
             raise ApiResponseValidationException(error.messages)
+
     @staticmethod
     def parse_obj(obj: object) -> dict:
         return {
             prop: value
             for prop in dir(obj)
-                if not prop.startswith('_')
-                and not prop.endswith('_')
-                and not callable(value := getattr(obj, prop))
+            if not prop.startswith('_')
+               and not prop.endswith('_')
+               and not callable(value := getattr(obj, prop))
         }
 
     def dump(self) -> dict:

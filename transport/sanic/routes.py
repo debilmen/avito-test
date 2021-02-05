@@ -14,6 +14,6 @@ def get_routes(config: ApplicationConfig, context: Context) -> Tuple:
             config, context, uri='/ad', methods=['GET'],
         ),
         endpoints.GetListEndpoint(
-            config, context, uri='/ads', methods=['GET'],
+            config, context, uri='/ad/<page_n:int>', methods=['GET'],
         )
     )
