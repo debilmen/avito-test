@@ -6,7 +6,7 @@ Sanic, Postgresql, marshmallow, SQLAlchemy
 =============
 Качаем
 ***
-Создаем и настраиваем `.env`
+Создаем и настраиваем `.env` в директории проекта
 
 ```
 POSTGRES_DB = название_DB
