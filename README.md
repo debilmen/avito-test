@@ -17,7 +17,7 @@ POSTGRES_PORT = порт
 host = 0.0.0.0
 ```
 ***
-Крутим <p>docker-compose up</p>
+<p>Крутим docker-compose up</p>
 
 Роуты
 =============
