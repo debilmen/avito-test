@@ -50,7 +50,7 @@ response:
         "name": str,
         "price": int,
         "photo": str,
-         "all_photo": list #optional,
+         "all_photo": list, #optional
          "description": str
         }
  ```   
@@ -67,14 +67,12 @@ response:
     [{
         "name": str,
         "price": int,
-        "photo": str,
+        "photo": str
       },
        {
         "name": str,
         "price": int,
-        "photo": str,
-        "all_photo": list #optional,
-        "description": str
+        "photo": str      
         },
         ........
       ]
