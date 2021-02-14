@@ -17,7 +17,7 @@ POSTGRES_PORT = порт
 host = 0.0.0.0
 ```
 ***
-<p>docker-compose up</p>
+Крутим <p>docker-compose up</p>
 
 Роуты
 =============
@@ -26,7 +26,7 @@ host = 0.0.0.0
 ```
 request: 
 {  
-        "name": str,https://github.com/debilmen/avito-test/issues
+        "name": str,
         "description": str,
         "photo": list,
         "price": int 
@@ -34,7 +34,7 @@ request:
 response:
     {
         "id": int,
-        "status_code": 201
+        "status_code": int
         }
 ```   
 /ad "GET"
@@ -51,7 +51,7 @@ response:
         "price": int,
         "photo": str,
          "all_photo": list, #optional
-         "description": str
+         "description": str #optional
         }
  ```   
 /ad/<page_n:int> "GET" <br/>
@@ -61,7 +61,7 @@ response:
  request: 
 {        
         "ascend_price": bool, #optional
-        "ascend_date": bool, #optional
+        "ascend_date": bool #optional
         }
 response:
     [{
